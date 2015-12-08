@@ -4,11 +4,20 @@ const Communication = require('process-communication')
 const Helpers = require('../helper.js')
 
 const communication = Communication.forkFile(__dirname + '/worker.js')
-const requestStart = Helpers.now()
+
+let requestStart = Helpers.now()
+let ms = null
 
 communication.request('random').then(function(){
-  communication.kill()
-  const ms = Helpers.diff(requestStart)
+  ms = Helpers.diff(requestStart)
+  console.log('first request took %d miliseconds', ms)
 
-  console.log('request took %d miliseconds', ms)
+  requestStart = Helpers.now()
+
+  communication.request('random').then(function(){
+    communication.kill()
+
+    ms = Helpers.diff(requestStart)
+    console.log('second request took %d miliseconds', ms)
+  })
 })
