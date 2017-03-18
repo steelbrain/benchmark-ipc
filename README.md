@@ -1,6 +1,8 @@
 Benchmark-IPC
 ============
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/steelbrain/benchmark-ipc.svg)](https://greenkeeper.io/)
+
 A few scripts for measuring the overhead of using IPC.
 
 #### Inter-Process
